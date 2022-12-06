@@ -22,14 +22,14 @@ FIELD_LEFT = 0
 FIELD_RIGHT = SCREEN_WIDTH
 
 # FONT
-FONT_FILE = "shooting/assets/fonts/zorque.otf"
+FONT_FILE = "batter/assets/fonts/zorque.otf"
 FONT_SMALL = 32
 FONT_LARGE = 48
 
 # SOUND
-BOUNCE_SOUND = "shooting/assets/sounds/boing.wav"
-WELCOME_SOUND = "shooting/assets/sounds/start.wav"
-OVER_SOUND = "shooting/assets/sounds/over.wav"
+BOUNCE_SOUND = "batter/assets/sounds/boing.wav"
+WELCOME_SOUND = "batter/assets/sounds/start.wav"
+OVER_SOUND = "batter/assets/sounds/over.wav"
 
 # TEXT
 ALIGN_CENTER = 0
@@ -56,7 +56,7 @@ IN_PLAY = 3
 GAME_OVER = 4
 
 # LEVELS
-LEVEL_FILE = "shooting/assets/data/level-{:03}.txt"
+LEVEL_FILE = "batter/assets/data/level-{:03}.txt"
 BASE_LEVELS = 5
 
 # -------------------------------------------------------------------------------------------------- 
