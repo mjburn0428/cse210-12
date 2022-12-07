@@ -1,6 +1,7 @@
 import pygame
-
+from constants import *
 from game.casting.actor import Actor
+from game.casting.player import Player
 
 class KeyboardService:
     """Detects player input. 
@@ -29,20 +30,21 @@ class KeyboardService:
         """
         
         player_vel = 5
-    
-        ship = 0
+        
+        player = Player(300, 650)
+
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and ship._x - player_vel > 0: # left
-            ship._x -= player_vel
-        if keys[pygame.K_RIGHT] and ship._x + player_vel + ship.get_width() < SCREEN_WIDTH: # right
-            ship._x += player_vel
-        if keys[pygame.K_UP] and ship._y - player_vel > 0: # up
-            ship._y -= player_vel
-        if keys[pygame.K_DOWN] and ship._y + player_vel + ship.get_height() + 15 < SCREEN_HEIGHT: # down
-            ship._y += player_vel
+        if keys[pygame.K_LEFT] and player._x - player_vel > 0: # left
+            player._x -= player_vel
+        if keys[pygame.K_RIGHT] and player._x + player_vel + player.get_width() < SCREEN_WIDTH: # right
+            player._x += player_vel
+        if keys[pygame.K_UP] and player._y - player_vel > 0: # up
+            player._y -= player_vel
+        if keys[pygame.K_DOWN] and player._y + player_vel + player.get_height() + 15 < SCREEN_HEIGHT: # down
+            player._y += player_vel
         if keys[pygame.K_SPACE]:
-            ship.shoot()
+            player.shoot()
 
         # direction = (x, y)
         # direction = direction.scale(self._cell_size)

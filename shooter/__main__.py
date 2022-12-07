@@ -7,46 +7,22 @@ pygame.font.init()
 from constants import *
 from game.casting.actor import Actor
 from game.casting.player import Player
-# from game.services.keyboard_service import KeyboardService
-
-# # SCREEN
-# # WIDTH, HEIGHT = 750, 750
-# SCREEN_WIDTH = 950
-# SCREEN_HEIGHT = 750
-# CENTER_X = SCREEN_WIDTH / 2
-# CENTER_Y = SCREEN_HEIGHT / 2
-
-
-# WIN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-# pygame.display.set_caption("Shooter game")
-
-# # Load images
-# RED_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_red_small.png"))
-# GREEN_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_green_small.png"))
-# BLUE_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_blue_small.png"))
-
-# # Player player
-# YELLOW_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_yellow.png"))
-
-# # Lasers
-# RED_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_red.png"))
-# GREEN_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_green.png"))
-# BLUE_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_blue.png"))
-# YELLOW_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_yellow.png"))
-
-# # Background
-# BG = pygame.transform.scale(pygame.image.load(os.path.join("shooter/assets", "background-black.png")), (SCREEN_WIDTH, SCREEN_HEIGHT))
-
-
+from game.services.keyboard_service import KeyboardService
+from game.casting.opponent import Opponent
 
 
 
 def main():
     gameRunning = True
     FPS = 60
-    level = 1
+    level = 0
     lives = 3
     main_font = pygame.font.SysFont("comicsans", 40)
+    lost_game_font = pygame.font.SysFont("cosmicsans", 60)
+
+    opponents = []
+    waveLength = 5
+    opponentVelocity = 1
 
     player_vel = 5
     player = Player(300, 650)
@@ -54,6 +30,9 @@ def main():
     # keys = KeyboardService()
 
     clock = pygame.time.Clock()
+
+    
+    lost = False
     
     def redraw_window():
         WIN.blit(BG, (0,0))
@@ -64,14 +43,14 @@ def main():
         WIN.blit(lives_tag, (10, 10))
         WIN.blit(level_tag, (SCREEN_WIDTH - level_tag.get_width() - 10, 10))
 
-        # for enemy in enemies:
-        #     enemy.draw(WIN)
+        for opponent in opponents:
+            opponent.draw(WIN)
 
-        # player.draw(WIN)
+        player.draw(WIN)
 
-        # if lost:
-        #     lost_label = lost_font.render("You Lost!!", 1, (255,255,255))
-        #     WIN.blit(lost_label, (WIDTH/2 - lost_label.get_width()/2, 350))
+        if lost:
+            lost_label = lost_game_font.render("You Lost!!", 1, (255,255,255))
+            WIN.blit(lost_label, (SCREEN_WIDTH/2 - lost_label.get_width()/2, 350))
         player.draw(WIN)
         # keys.get_direction()
         pygame.display.update()
@@ -79,6 +58,31 @@ def main():
     while gameRunning:
         clock.tick(FPS)
         redraw_window()
+
+        if lives <= 0 or player._health <= 0:
+            lost = False
+            lost_count = 0
+
+        if lost:
+            if lost_count > FPS * 3:
+                gameRunning = False
+            else:
+                continue
+
+
+        if len(opponents) == 0:
+            level = level + 1
+            waveLength = waveLength + 1
+
+            for i in range (waveLength):
+                opponent = Opponent(random.randrange(50, SCREEN_WIDTH-100), random.randrange(-1500, -100), random.choice(["red", "blue", "green"]))
+                opponents.append(opponent)
+
+
+                # opponent = opponent(random.randrange(50, SCREEN_WIDTH-100), random.randrange(-1500*level/3, -100)), random.choice(["red", "blue", "green"])
+                # opponents.append(opponent)
+
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameRunning = False
@@ -95,6 +99,14 @@ def main():
         if keys[pygame.K_SPACE]:
             player.shoot()
 
+
+        for opponent in opponents:
+            opponent.move(opponentVelocity)
+            if opponent._y + opponent.get_height() > SCREEN_HEIGHT:
+                lives -= 1
+                opponents.remove(opponent)
+
+       
 
 main()
 
