@@ -46,7 +46,7 @@ def main():
     main_font = pygame.font.SysFont("comicsans", 40)
 
     player_vel = 5
-    ship = Actor(300, 650)
+    player = Actor(300, 650)
 
     # keys = KeyboardService()
 
@@ -69,7 +69,7 @@ def main():
         # if lost:
         #     lost_label = lost_font.render("You Lost!!", 1, (255,255,255))
         #     WIN.blit(lost_label, (WIDTH/2 - lost_label.get_width()/2, 350))
-        ship.draw(WIN)
+        player.draw(WIN)
         # keys.get_direction()
         pygame.display.update()
 
@@ -81,16 +81,16 @@ def main():
                 gameRunning = False
 
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and ship._x - player_vel > 0: # left
-            ship._x -= player_vel
-        if keys[pygame.K_RIGHT] and ship._x + player_vel + ship.get_width() < SCREEN_WIDTH: # right
-            ship._x += player_vel
-        if keys[pygame.K_UP] and ship._y - player_vel > 0: # up
-            ship._y -= player_vel
-        if keys[pygame.K_DOWN] and ship._y + player_vel + ship.get_height() + 15 < SCREEN_HEIGHT: # down
-            ship._y += player_vel
+        if keys[pygame.K_LEFT] and player._x - player_vel > 0: # left
+            player._x -= player_vel
+        if keys[pygame.K_RIGHT] and player._x + player_vel + player.get_width() < SCREEN_WIDTH: # right
+            player._x += player_vel
+        if keys[pygame.K_UP] and player._y - player_vel > 0: # up
+            player._y -= player_vel
+        if keys[pygame.K_DOWN] and player._y + player_vel + player.get_height() + 15 < SCREEN_HEIGHT: # down
+            player._y += player_vel
         if keys[pygame.K_SPACE]:
-            ship.shoot()
+            player.shoot()
 
 
 main()

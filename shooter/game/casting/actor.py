@@ -40,8 +40,8 @@ class Actor:
     #         self.lasers.append(laser)
     #         self.cool_down_counter = 1
 
-    # def get_width(self):
-    #     return self._ship_img.get_width()
+    def get_width(self):
+        return self._ship_img.get_width()
 
-    # def get_height(self):
-    #     return self._ship_img.get_height()
+    def get_height(self):
+        return self._ship_img.get_height()
