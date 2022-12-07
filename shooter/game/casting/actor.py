@@ -7,14 +7,14 @@ class Actor:
         self._x = x
         self._y = y
         self._health = health
-        self._ship_img = None
+        self.ship_img = None
         self._bullet_img = None
         self._bullets = []
         self.cool_down_counter = 0
 
     def draw(self, window):
-        pygame.draw.rect(window, (225,0,0), (self._x, self._y, 50, 50))
-        # window.blit(self._ship_img, (self._x, self._y))
+        # pygame.draw.rect(window, (225,0,0), (self._x, self._y, 50, 50))
+        window.blit(self.ship_img, (self._x, self._y))
     #     for bullet in self.bullets:
     #         laser.draw(window)
 
@@ -41,7 +41,7 @@ class Actor:
     #         self.cool_down_counter = 1
 
     def get_width(self):
-        return self._ship_img.get_width()
+        return self.ship_img.get_width()
 
     def get_height(self):
-        return self._ship_img.get_height()
+        return self.ship_img.get_height()

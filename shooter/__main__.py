@@ -4,6 +4,7 @@ import time
 import random
 pygame.font.init()
 from game.casting.actor import Actor
+from game.casting.player import Player
 # from game.services.keyboard_service import KeyboardService
 
 # SCREEN
@@ -46,7 +47,7 @@ def main():
     main_font = pygame.font.SysFont("comicsans", 40)
 
     player_vel = 5
-    player = Actor(300, 650)
+    player = Player(300, 650)
 
     # keys = KeyboardService()
 
