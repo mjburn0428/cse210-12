@@ -1,26 +1,36 @@
-import pygame
-from constants import *
+import pygame as pg 
+from pygame.sprite import Sprite
 
-class Bullet:
-    def __init__(self, x, y, img):
-        self._x = x
-        self._y = y
-        self._img = img
-        self.mask = pygame.mask.from_surface(self._img)
-
-    def draw(self, window):
-        window.blit(self._img, (self._x, self._y))
-    
-    def move(self, velocity):
-        self._y += velocity
-
-    def off_screen(self, height):
-        return not(self._y <= height and self._y >= 0)
-
-    def collision(self, obj):
-        return collide(obj, self)
-
-# def collide(obj1, obj2):
-#     offset_x = obj2._x - obj1._x
-#     offset_y = obj2._y - obj1._y
-#     return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
+class Bullet(Sprite):
+    """A class to manage bullets fired from the ship"""
+    def __init__(self, setting, screen, ship):
+        """Create a bullet object at the ships current position"""
+        super(Bullet, self).__init__()
+        self.screen = screen
+        
+        #load the bullet image and set its rect attribute
+        self.image = pg.image.load('assest/bullet.bmg')
+        self.rect = self.image.get_rect()
+        
+        #Create a bullet rect at (0,0)
+        ##self.rect = pg.Rect(0, 0, setting.bulletWidth, setting.bulletHeight)
+        self.rect.centerx = ship.rect.centerx
+        self.rect.top = ship.rect.top 
+        
+        #store the bullets position as a decimal value
+        self.y = float(self.rect.y)
+        
+        self.color = setting.bulletColor
+        self.bulletSpeed = setting.bulletSpeed
+        
+    def update(self):
+        """Move the bullet -y up the screen"""
+        #update the decimal position of the bullet
+        self.y -= self.bulletSpeed
+        #update the rect position
+        self.rect.y = self.y
+        
+    def drawBullet(self):
+        """Draw the bullet to the screen"""
+        #pg.draw.rect(self.screen, self.color, self.rect)
+        self.screen.blit(self.image, self.rect)

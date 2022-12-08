@@ -1,8 +1,8 @@
-import pygame
+import pygame as pg 
 import os
 from game.casting.actor import Actor
 from constants import *
-
+from bullet import Bullet
 
 
 class Player(Actor):

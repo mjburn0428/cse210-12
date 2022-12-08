@@ -1,6 +1,6 @@
 # cse210-12
 
-# 2 Player Batter Game
+# Shooter Game
 Is a clone of the classic breakout game.
 
 ## Getting Startedd
