@@ -37,7 +37,7 @@ def main():
     
     def redraw_window():
         WIN.blit(BG, (0,0))
-        # draw text
+        # draw text on screen
         lives_tag = main_font.render(f"Lives: {lives}", 1, (255,255,255))
         level_tag = main_font.render(f"Level: {level}", 1, (255,255,255))
 
@@ -53,7 +53,7 @@ def main():
             lost_label = lost_game_font.render("You Lost!!", 1, (255,255,255))
             WIN.blit(lost_label, (SCREEN_WIDTH/2 - lost_label.get_width()/2, 350))
         player.draw(WIN)
-        # keys.get_direction()
+        
         pygame.display.update()
 
     while gameRunning:

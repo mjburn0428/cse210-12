@@ -2,21 +2,25 @@ import pygame
 from constants import *
 
 class Bullet:
+    """A class that manages the bullet from the ship"""
     def __init__(self, x, y, img):
         self._x = x
         self._y = y
         self._img = img
         self.mask = pygame.mask.from_surface(self._img)
 
+    # Draw bullet on window
     def drawBullet(self, window):
         window.blit(self._img, (self._x, self._y))
     
+    # Determine the speed of the bullet
     def moveBullet(self, velocity):
         self._y += velocity
 
+
     def off_screen(self, height):
         return not(self._y <= height and self._y >= 0)
-
+    
     def collision(self, obj):
         return collide(obj, self)
 
