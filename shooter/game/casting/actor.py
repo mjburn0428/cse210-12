@@ -19,12 +19,12 @@ class Actor:
         # pygame.draw.rect(window, (225,0,0), (self._x, self._y, 50, 50))
         window.blit(self.ship_img, (self._x, self._y))
         for bullet in self._bullets:
-            bullet.draw(window)
+            bullet.drawBullet(window)
 
     def move_bullets(self, velocity, obj):
         self.cooldown()
         for bullet in self._bullets:
-            bullet.move(velocity)
+            bullet.moveBullet(velocity)
             if bullet.off_screen(SCREEN_HEIGHT):
                 self._bullets.remove(bullet)
             elif bullet.collision(obj):

@@ -8,10 +8,10 @@ class Bullet:
         self._img = img
         self.mask = pygame.mask.from_surface(self._img)
 
-    def draw(self, window):
+    def drawBullet(self, window):
         window.blit(self._img, (self._x, self._y))
     
-    def move(self, velocity):
+    def moveBullet(self, velocity):
         self._y += velocity
 
     def off_screen(self, height):

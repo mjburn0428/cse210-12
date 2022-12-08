@@ -16,7 +16,7 @@ class Player(Actor):
     def move_bullets(self, velocity, objs):
         self.cooldown()
         for bullet in self._bullets:
-            bullet.move(velocity)
+            bullet.moveBullet(velocity)
             if bullet.off_screen(SCREEN_HEIGHT):
                 self._bullets.remove(bullet)
             else:
