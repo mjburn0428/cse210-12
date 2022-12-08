@@ -1,8 +1,8 @@
-import pygame
+import pygame as pg 
 import os
 from game.casting.actor import Actor
 from constants import *
-
+from bullet import Bullet
 
 
 class Player(Actor):
@@ -12,3 +12,5 @@ class Player(Actor):
         self.laser_img = YELLOW_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
         self.max_health = health
+
+    
