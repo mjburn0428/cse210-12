@@ -106,7 +106,5 @@ def main():
                 lives -= 1
                 opponents.remove(opponent)
 
-       
-
 main()
 
