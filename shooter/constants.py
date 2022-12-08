@@ -20,7 +20,7 @@ BLUE_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_b
 # Player player
 YELLOW_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_yellow.png"))
 
-# Lasers
+# BULLETS
 RED_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_red.png"))
 GREEN_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_green.png"))
 BLUE_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_blue.png"))
@@ -28,3 +28,8 @@ YELLOW_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_yel
 
 # Background
 BG = pygame.transform.scale(pygame.image.load(os.path.join("shooter/assets", "background-black.png")), (SCREEN_WIDTH, SCREEN_HEIGHT))
+
+def collide(obj1, obj2):
+    offset_x = obj2._x - obj1._x
+    offset_y = obj2._y - obj1._y
+    return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None

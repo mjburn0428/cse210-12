@@ -9,22 +9,23 @@ from game.casting.actor import Actor
 from game.casting.player import Player
 from game.services.keyboard_service import KeyboardService
 from game.casting.opponent import Opponent
-
+ 
 
 
 def main():
     gameRunning = True
     FPS = 60
     level = 0
-    lives = 3
+    lives = 5
     main_font = pygame.font.SysFont("comicsans", 40)
     lost_game_font = pygame.font.SysFont("cosmicsans", 60)
 
     opponents = []
     waveLength = 5
+    bulletVelocity = 7
     opponentVelocity = 1
 
-    player_vel = 5
+    player_vel = 7
     player = Player(300, 650)
 
     # keys = KeyboardService()
@@ -85,7 +86,8 @@ def main():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                gameRunning = False
+                quit()
+                # gameRunning = False
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] and player._x - player_vel > 0: # left
@@ -102,11 +104,36 @@ def main():
 
         for opponent in opponents:
             opponent.move(opponentVelocity)
-            if opponent._y + opponent.get_height() > SCREEN_HEIGHT:
+            opponent.move_bullets(bulletVelocity, player)
+
+            if random.randrange(0, 2*60) == 1:
+                opponent.shoot()
+
+            if collide(opponent, player):
+                player._health -= 10
+                opponents.remove(opponent)
+
+            elif opponent._y + opponent.get_height() > SCREEN_HEIGHT:
                 lives -= 1
                 opponents.remove(opponent)
 
-       
+        player.move_bullets(-bulletVelocity, opponents)
 
-main()
+def main_menu():
+    title_font = pygame.font.SysFont("comicsans", 70)
+    run = True
+    while run:
+        WIN.blit(BG, (0,0))
+        title_label = title_font.render("To begin, Press the mouse...", 1, (255,255,255))
+        WIN.blit(title_label, (SCREEN_WIDTH/2 - title_label.get_width()/2, 350))
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                main()
+    pygame.quit()
 
+main_menu()
+
+    

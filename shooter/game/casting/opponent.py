@@ -1,4 +1,5 @@
 from game.casting.actor import Actor
+from game.casting.bullet import Bullet
 from constants import *
 class Opponent(Actor):
     COLOR_MAP = {
@@ -12,11 +13,12 @@ class Opponent(Actor):
         self.mask = pygame.mask.from_surface(self.ship_img)
 
 
-    def move(self, vel):
-        self._y += vel
+    def move(self, velocity):
+        self._y += velocity
 
-    # def shoot(self):
-    #     if self.cool_down_counter == 0:
-    #         laser = Laser(self.x-20, self.y, self.laser_img)
-    #         self.lasers.append(laser)
-    #         self.cool_down_counter = 1
+    # Allow bullet from opponent to be shot from the center instead of the side
+    def shoot(self):
+        if self.cool_down_counter == 0:
+            bullet = Bullet(self._x-20, self._y, self.laser_img)
+            self._bullets.append(bullet)
+            self.cool_down_counter = 1

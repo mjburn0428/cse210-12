@@ -12,3 +12,26 @@ class Player(Actor):
         self.laser_img = YELLOW_LASER
         self.mask = pygame.mask.from_surface(self.ship_img)
         self.max_health = health
+
+    def move_bullets(self, velocity, objs):
+        self.cooldown()
+        for bullet in self._bullets:
+            bullet.move(velocity)
+            if bullet.off_screen(SCREEN_HEIGHT):
+                self._bullets.remove(bullet)
+            else:
+                for obj in objs:
+                    if bullet.collision(obj):
+                        objs.remove(obj)
+                        if bullet in self._bullets:
+                            self._bullets.remove(bullet)
+
+    def draw(self, window):
+        super().draw(window)
+        self.healthBar(window)
+
+    #Shows the health of the player
+    def healthBar(self, window):
+        pygame.draw.rect(window, (255,0,0), (self._x, self._y + self.ship_img.get_height() + 10, self.ship_img.get_width(), 10))
+        pygame.draw.rect(window, (0,255,0), (self._x, self._y + self.ship_img.get_height() + 10, self.ship_img.get_width() * (self._health/self.max_health), 10))
+
