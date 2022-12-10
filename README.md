@@ -40,4 +40,5 @@ root                    (project root folder)
 ## Authors
 ---
 * Koki Nakayama
+* Chelsea Chngh Lee Ping
 (Type your name here)
