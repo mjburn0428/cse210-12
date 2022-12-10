@@ -39,4 +39,5 @@ root                    (project root folder)
 
 ## Authors
 ---
-* (Type your name here)
+* Koki Nakayama
+(Type your name here)
