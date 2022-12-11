@@ -19,6 +19,7 @@ BLUE_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_b
 
 # Player player
 YELLOW_SPACE_SHIP = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_yellow.png"))
+YELLOW_PLAYER_TWO = pygame.image.load(os.path.join("shooter/assets", "pixel_ship_yellow.png"))
 
 # BULLETS
 RED_LASER = pygame.image.load(os.path.join("shooter/assets", "pixel_laser_red.png"))

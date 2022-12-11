@@ -26,7 +26,8 @@ def main():
     opponentVelocity = 1
 
     player_vel = 7
-    player = Player(300, 650)
+    player = Player(650, 650)
+    player2 = Player(325, 650)
 
     # keys = KeyboardService()
 
@@ -48,11 +49,13 @@ def main():
             opponent.draw(WIN)
 
         player.draw(WIN)
+        player2.draw(WIN)
 
         if lost:
             lost_label = lost_game_font.render("You Lost!!", 1, (255,255,255))
             WIN.blit(lost_label, (SCREEN_WIDTH/2 - lost_label.get_width()/2, 350))
         player.draw(WIN)
+        player2.draw(WIN)
         
         pygame.display.update()
 
@@ -60,15 +63,15 @@ def main():
         clock.tick(FPS)
         redraw_window()
 
-        if lives <= 0 or player._health <= 0:
-            lost = False
-            lost_count = 0
+        if lives <= 0:
+            lost = True
+            gameRunning = False
 
-        if lost:
-            if lost_count > FPS * 3:
-                gameRunning = False
-            else:
-                continue
+        # if lost:
+        #     if lost_count > FPS * 3:
+        #         gameRunning = False
+        #     else:
+        #         continue
 
 
         if len(opponents) == 0:
@@ -97,6 +100,16 @@ def main():
         if keys[pygame.K_SPACE]:
             player.shoot()
 
+        if keys[pygame.K_a] and player2._x - player_vel > 0: # left
+            player2._x -= player_vel
+        if keys[pygame.K_d] and player2._x + player_vel + player2.get_width() < SCREEN_WIDTH: # right
+            player2._x += player_vel
+        if keys[pygame.K_w] and player2._y - player_vel > 0: # up
+            player2._y -= player_vel
+        if keys[pygame.K_s] and player2._y + player_vel + player2.get_height() + 15 < SCREEN_HEIGHT: # down
+            player2._y += player_vel
+        if keys[pygame.K_x]:
+            player2.shoot()
 
         for opponent in opponents:
             opponent.move(opponentVelocity)
@@ -108,12 +121,23 @@ def main():
             if collide(opponent, player):
                 player._health -= 10
                 opponents.remove(opponent)
+                if player._health <= 0:
+                    lives -= 1
+                    player._health = player.max_health
 
             elif opponent._y + opponent.get_height() > SCREEN_HEIGHT:
                 lives -= 1
                 opponents.remove(opponent)
 
+            if collide(opponent, player2):
+                player2._health -= 10
+                opponents.remove(opponent)
+                if player2._health <= 0:
+                    lives -= 1
+                    player2._health = player2.max_health
+
         player.move_bullets(-bulletVelocity, opponents)
+        player2.move_bullets(-bulletVelocity, opponents)
 
 def main_menu():
     title_font = pygame.font.SysFont("comicsans", 70)
@@ -131,5 +155,3 @@ def main_menu():
     pygame.quit()
 
 main_menu()
-
-    
