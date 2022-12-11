@@ -13,6 +13,7 @@ from game.casting.opponent import Opponent
 
 
 def main():
+    # Setting the variables for game set up adn play
     gameRunning = True
     FPS = 60
     level = 0
@@ -73,7 +74,7 @@ def main():
         #     else:
         #         continue
 
-
+        # iterating through different levels
         if len(opponents) == 0:
             level = level + 1
             waveLength = waveLength + 1
@@ -88,6 +89,7 @@ def main():
                 quit()
                 # gameRunning = False
 
+        # keys to control the players
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] and player._x - player_vel > 0: # left
             player._x -= player_vel
@@ -111,6 +113,7 @@ def main():
         if keys[pygame.K_x]:
             player2.shoot()
 
+        # moving the opponenets and collision
         for opponent in opponents:
             opponent.move(opponentVelocity)
             opponent.move_bullets(bulletVelocity, player)
@@ -140,6 +143,7 @@ def main():
         player2.move_bullets(-bulletVelocity, opponents)
 
 def main_menu():
+    # make a title screen
     title_font = pygame.font.SysFont("comicsans", 70)
     run = True
     while run:

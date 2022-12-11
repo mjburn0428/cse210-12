@@ -2,6 +2,7 @@ from game.casting.actor import Actor
 from game.casting.bullet import Bullet
 from constants import *
 class Opponent(Actor):
+    # randomized coloration
     COLOR_MAP = {
                 "red": (RED_SPACE_SHIP, RED_LASER),
                 "green": (GREEN_SPACE_SHIP, GREEN_LASER),

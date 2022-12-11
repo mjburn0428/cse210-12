@@ -7,6 +7,7 @@ class Actor:
     COOLDOWN = 30
 
     def __init__(self, x, y, health=100):
+        # has all the shared attributes
         self._x = x
         self._y = y
         self._health = health
@@ -22,6 +23,7 @@ class Actor:
             bullet.drawBullet(window)
 
     def move_bullets(self, velocity, obj):
+        # moves this actors list of bullets
         self.cooldown()
         for bullet in self._bullets:
             bullet.moveBullet(velocity)
@@ -38,6 +40,7 @@ class Actor:
             self.cool_down_counter += 1
 
     def shoot(self):
+        # fires another bullets and adds it to its list of bullets
         if self.cool_down_counter == 0:
             bullet = Bullet(self._x, self._y, self.laser_img)
             self._bullets.append(bullet)

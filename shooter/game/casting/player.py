@@ -15,10 +15,12 @@ class Player(Actor):
         self.max_health = health
 
     def move_bullets(self, velocity, objs):
+        # moves its list of bullets
         self.cooldown()
         for bullet in self._bullets:
             bullet.moveBullet(velocity)
             if bullet.off_screen(SCREEN_HEIGHT):
+                # bullets not allowed off screen
                 self._bullets.remove(bullet)
             else:
                 for obj in objs:
@@ -28,6 +30,7 @@ class Player(Actor):
                             self._bullets.remove(bullet)
 
     def draw(self, window):
+        # draws the player
         super().draw(window)
         self.healthBar(window)
 
