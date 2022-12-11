@@ -3,7 +3,7 @@
 # Shooter Game
 Is a clone of the classic breakout game.
 
-## Getting Startedd
+## Getting Started
 ---
 Make sure you have Python 3.8.0 or newer and Raylib Python CFFI 3.7 installed and running on your machine. You can install Raylib Python CFFI by opening a terminal and running the following command.
 ```
@@ -41,4 +41,4 @@ root                    (project root folder)
 ---
 * Koki Nakayama
 * Chelsea Chngh Lee Ping
-(Type your name here)
+* Shaun Vann
