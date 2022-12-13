@@ -22,7 +22,7 @@ class Actor:
         for bullet in self._bullets:
             bullet.drawBullet(window)
 
-    def move_bullets(self, velocity, obj):
+    def move_bullets(self, velocity, obj, obj2):
         # moves this actors list of bullets
         self.cooldown()
         for bullet in self._bullets:
@@ -31,6 +31,9 @@ class Actor:
                 self._bullets.remove(bullet)
             elif bullet.collision(obj):
                 obj._health -= 10
+                self._bullets.remove(bullet)
+            elif bullet.collision(obj2):
+                obj2._health -= 10
                 self._bullets.remove(bullet)
 
     def cooldown(self):

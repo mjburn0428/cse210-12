@@ -116,7 +116,7 @@ def main():
         # moving the opponenets and collision
         for opponent in opponents:
             opponent.move(opponentVelocity)
-            opponent.move_bullets(bulletVelocity, player)
+            opponent.move_bullets(bulletVelocity, player, player2)
 
             if random.randrange(0, 2*60) == 1:
                 opponent.shoot()
