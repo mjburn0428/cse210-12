@@ -1,7 +1,7 @@
 # cse210-12
 
 # Shooter Game
-Is a clone of the classic breakout game.
+Shooter is a clone of the classic breakout game or Batter. 
 
 ## Getting Started
 ---
@@ -42,3 +42,4 @@ root                    (project root folder)
 * Koki Nakayama
 * Chelsea Chngh Lee Ping
 * Shaun Vann
+* Joe Burner
