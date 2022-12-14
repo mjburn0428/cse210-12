@@ -13,7 +13,7 @@ from game.casting.opponent import Opponent
 
 
 def main():
-    # Setting the variables for game set up adn play
+    # Setting the variables for game set up and play
     gameRunning = True
     FPS = 60
     level = 0
